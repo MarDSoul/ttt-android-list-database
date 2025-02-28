@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">IP Test Task</string>
+    <string name="title">Список товаров</string>
     <!--    Card-->
     <string name="amount_label_text">На складе</string>
     <string name="date_label_text">Дата добавления</string>

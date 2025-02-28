@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemDao {
-    @Query("SELECT * FROM item")
-    fun getAllItems(): Flow<List<ItemEntity>>
+    @Query("SELECT * FROM item WHERE name LIKE '%' || :name || '%'")
+    fun getItemsByName(name: String): Flow<List<ItemEntity>>
 
     @Query("UPDATE item SET amount = :amount WHERE id = :id")
     suspend fun setAmount(id: Int, amount: Int)

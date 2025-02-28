@@ -15,8 +15,8 @@ class ItemRepositoryImpl @Inject constructor(
     private val itemDao: ItemDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ItemRepository {
-    override fun getItems(): Flow<List<Item>> {
-        return itemDao.getAllItems()
+    override fun getItems(name: String): Flow<List<Item>> {
+        return itemDao.getItemsByName(name)
             .map { list -> list.map { it.toModel() } }
             .flowOn(ioDispatcher)
     }

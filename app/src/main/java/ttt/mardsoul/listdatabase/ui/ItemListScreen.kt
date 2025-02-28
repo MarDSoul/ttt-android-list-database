@@ -1,10 +1,12 @@
 package ttt.mardsoul.listdatabase.ui
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -32,6 +34,7 @@ import ttt.mardsoul.listdatabase.R
 import ttt.mardsoul.listdatabase.domain.model.Item
 import ttt.mardsoul.listdatabase.ui.components.ItemCard
 import ttt.mardsoul.listdatabase.ui.components.ItemDialog
+import ttt.mardsoul.listdatabase.ui.components.SearchBar
 
 @Composable
 fun ItemListScreen(
@@ -42,29 +45,45 @@ fun ItemListScreen(
     var showEditAmountDialog by remember { mutableStateOf(false) }
     var showDeleteDialog by remember { mutableStateOf(false) }
     var selectedItem by remember { mutableStateOf<Item?>(null) }
+    val query by viewModel.query.collectAsState()
 
-    LazyColumn(
+    Column(
         modifier = modifier
-            .fillMaxSize()
-            .systemBarsPadding(),
-        contentPadding = PaddingValues(
-            horizontal = dimensionResource(R.dimen.dimen_16),
-            vertical = dimensionResource(R.dimen.dimen_8)
-        ),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.dimen_4)),
+            .systemBarsPadding()
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(listState.value) { item ->
-            ItemCard(
-                item = item,
-                onClickEditAmount = {
-                    selectedItem = item
-                    showEditAmountDialog = true
-                },
-                onClickDelete = {
-                    selectedItem = item
-                    showDeleteDialog = true
-                }
-            )
+        Text(
+            text = stringResource(R.string.title),
+            modifier = Modifier.padding(dimensionResource(R.dimen.dimen_16)),
+            style = MaterialTheme.typography.headlineMedium
+        )
+        SearchBar(query = query, onQueryChange = { viewModel.updateQuery(it) })
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize(),
+            contentPadding = PaddingValues(
+                horizontal = dimensionResource(R.dimen.dimen_16),
+                vertical = dimensionResource(R.dimen.dimen_8)
+            ),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.dimen_4)),
+        ) {
+            items(
+                items = listState.value,
+                key = { item -> item.id }
+            ) { item ->
+                ItemCard(
+                    item = item,
+                    onClickEditAmount = {
+                        selectedItem = item
+                        showEditAmountDialog = true
+                    },
+                    onClickDelete = {
+                        selectedItem = item
+                        showDeleteDialog = true
+                    }
+                )
+            }
         }
     }
 
