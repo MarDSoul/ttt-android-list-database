@@ -3,14 +3,15 @@ package ttt.mardsoul.listdatabase.data.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ttt.mardsoul.listdatabase.domain.model.Item
-import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Entity(tableName = "item")
 data class ItemEntity(
     @PrimaryKey
     val id: Int,
     val name: String,
-    val time: Int,
+    val time: Long,
     val tags: String,
     val amount: Int
 ) {
@@ -25,11 +26,12 @@ data class ItemEntity(
     }
 
     private fun convertTagsList(): List<String> {
-        val regexTag = Regex("(\"\\w+\")")
-        return regexTag.findAll(tags).map { it.value }.toList()
+        val regexTag = Regex("\"(\\w+)\"")
+        return regexTag.findAll(tags).map { it.groupValues[1] }.toList()
     }
 
     private fun convertTimeAsString(): String {
-        return DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(time)
+        val dataFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        return dataFormat.format(time)
     }
 }
