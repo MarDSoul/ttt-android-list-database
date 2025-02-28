@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import ttt.mardsoul.listdatabase.data.database.ItemDao
 import ttt.mardsoul.listdatabase.di.IoDispatcher
 import ttt.mardsoul.listdatabase.domain.ItemRepository
@@ -21,10 +22,14 @@ class ItemRepositoryImpl @Inject constructor(
     }
 
     override suspend fun changeAmount(itemId: Int, newAmount: Int) {
-        TODO("Not yet implemented")
+        withContext(ioDispatcher) {
+            itemDao.setAmount(itemId, newAmount)
+        }
     }
 
     override suspend fun deleteItem(itemId: Int) {
-        TODO("Not yet implemented")
+        withContext(ioDispatcher) {
+            itemDao.deleteItem(itemId)
+        }
     }
 }

@@ -12,17 +12,17 @@ import javax.inject.Qualifier
 @InstallIn(SingletonComponent::class)
 object CoroutinesDispatchersModule {
 
-	@DefaultDispatcher
-	@Provides
-	fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+    @DefaultDispatcher
+    @Provides
+    fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
-	@IoDispatcher
-	@Provides
-	fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+    @IoDispatcher
+    @Provides
+    fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
-	@MainDispatcher
-	@Provides
-	fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+    @MainDispatcher
+    @Provides
+    fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
 }
 

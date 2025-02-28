@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">IP Test Task</string>
+    <!--    Card-->
     <string name="amount_label_text">На складе</string>
     <string name="date_label_text">Дата добавления</string>
     <string name="edit_ic_cd">Редактировать</string>
     <string name="delete_ic_cd">Удалить</string>
+    <!--    Dialogs-->
+    <string name="edit_dialog_title">Количество товара</string>
+    <string name="edit_confirm_text">Принять</string>
+    <string name="edit_dismiss_text">Отмена</string>
+    <string name="plus_ic_cd">Увеличить количество</string>
+    <string name="minus_ic_cd">Уменьшить количество</string>
+    <string name="delete_dialog_title">Удаление товара</string>
+    <string name="delete_dialog_text">Вы действительно хотите удалить данный товар?</string>
+    <string name="delete_confirm_text">Да</string>
+    <string name="delete_dismiss_text">Нет</string>
+
 </resources>
